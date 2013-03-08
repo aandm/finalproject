@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions
   # GET /subscriptions.json
   def index
-    @subscriptions = Subscription.where(:user_id => session[:subscriber_id])
+    @subscriptions = Subscription.where(:subscriber_id => session[:user_id])
    
     respond_to do |format|
       format.html # index.html.erb
@@ -79,5 +79,9 @@ class SubscriptionsController < ApplicationController
       format.html { redirect_to subscriptions_url }
       format.json { head :no_content }
     end
+  end
+
+  def followers
+     @subscriptions = Subscription.where(:user_id => session[:user_id])
   end
 end

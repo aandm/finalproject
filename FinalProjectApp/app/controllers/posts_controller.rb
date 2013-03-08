@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+
     if session[:user_id].present?
       @posts = Post.where("user_id = #{session[:user_id]}").order('created_at DESC')
     end
@@ -84,6 +85,7 @@ class PostsController < ApplicationController
   def view
       user = User.find_by_username(params[:vieweduser])
       session[:vieweduser] = user.username
+      session[:viewed_id] = user.id
       if user.present?
         @viewed_id = user.id
         @curruser_id = session[:user_id]

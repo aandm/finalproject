@@ -1,0 +1,5 @@
+<%= form_for Subscription.new do |f| %>
+	<%= f.hidden_field :user_id, :value => session[:viewed_id] %>
+   	<%= f.hidden_field :subscriber_id, :value => session[:user_id] %>
+    <%= f.submit "Subscribe to User" %>  
+<% end %>

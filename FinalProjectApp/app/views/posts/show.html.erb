@@ -11,4 +11,24 @@
 <%= link_to 'Back', "/#{session[:vieweduser]}" %>
 
 <br><hr><hr>
-<%= render 'comments' %>
+
+Add a comment:
+
+<%= form_for Comment.new, :remote => true do |f| %>
+  <%= f.text_field :text, size: 50 %>
+  <%= f.hidden_field :post_id, :value => params[:id] %>
+
+  <% if session[:username].present? %>
+	<%= f.hidden_field :username, :value => session[:username] %>
+  <% else %>
+   	<%= f.hidden_field :username, :value => "Anonymous" %>
+  <% end %>
+
+  <%= f.submit "Submit" %>  
+<% end %>
+
+<ul id = "comments_section">
+<% @comments.each do |comment| %>
+ 	<%= render 'comments/comment', :comment => comment %>
+<% end %>
+</ul>

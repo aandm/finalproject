@@ -1,0 +1,10 @@
+<h1>Followers:</h1>
+
+<br>
+<% if @subscriptions.present? %>
+	<% @subscriptions.each do |subscription| %>
+	  <li><%= subscription.subscriber.username %></li>
+	<% end %>
+<% else %>
+	No followers yet.
+<% end %>

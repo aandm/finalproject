@@ -7,7 +7,7 @@
     <% if @viewed_id == @curruser_id %> 
         <%= link_to 'Create New Post', new_post_path %>
     <% else %>
-        <%= link_to "Subscribe to #{@username}", root_url %>    
+        <%= render 'subscriber' %>    
     <% end %>
     <br><br>
 

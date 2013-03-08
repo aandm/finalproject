@@ -1,0 +1,7 @@
+  <% if comment.username == "Anonymous" %>
+    <b>Anonymous</b>
+  <% else %>
+    <b><%= link_to "#{comment.username}", "/#{comment.username}" %></b>
+  <% end %>
+  on <%= comment.created_at.strftime("%B %d, %Y at %I:%M %p") %><br>
+  <%= comment.text %><br><br> 
