@@ -1,9 +1,6 @@
-Welcome <%=@current.firstname%> <%=@current.lastname%>!
+Welcome <%=@user.firstname%> <%=@user.lastname%>!
 
-	Your user name is @current.username
-
-	To login, click <%=link_to ("here!", login_url)%>
-
+	Your username is <%= @user.username %>.
 
 Thanks,
 
