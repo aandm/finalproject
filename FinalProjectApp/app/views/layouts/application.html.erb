@@ -45,9 +45,10 @@
               <li><%= link_to "My Posts", "/#{session[:username]}" %></li>
               <li><%= link_to "My Subscriptions", subscriptions_url %></li>
               <li><%= link_to "My Followers", followers_url %></li>
+              <li><%= link_to "My Groups", groups_url %></li>
               <li><%= link_to "My Profile", user_url(session[:user_id]) %></li>
               <li><%= link_to "Sign Out", logout_url %></li><p>
-              <li>&nbsp&nbsp Logged in as: <%= session[:username] %></li>
+              <li>&nbsp&nbsp Logged in as: <%= session[:username] %></li>              
             <% else %>
               <li><%= link_to "Sign Me Up!", new_user_url %></li>
               <li><%= link_to "Sign In", login_url %></li>
@@ -60,6 +61,8 @@
 
   <div class="container">
 
+    <br>
+    <br>
     <br>
     <br>
     <%= notice %>

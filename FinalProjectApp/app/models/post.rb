@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments
   
+  validates_presence_of :text
   
   auto_html_for :url do
     html_escape

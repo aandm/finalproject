@@ -25,6 +25,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/new.json
   def new
     @subscription = Subscription.new
+    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,13 +42,14 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions.json
   def create
     @subscription = Subscription.new(params[:subscription])
+    
 
     respond_to do |format|
       if @subscription.save
         format.html { redirect_to @subscription, notice: 'Subscription was successfully created.' }
         format.json { render json: @subscription, status: :created, location: @subscription }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to subscriptions_url }
         format.json { render json: @subscription.errors, status: :unprocessable_entity }
       end
     end

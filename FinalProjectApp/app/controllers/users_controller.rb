@@ -1,4 +1,21 @@
 class UsersController < ApplicationController
+
+  before_filter :identify_the_user
+  before_filter :authorize_user, :only => [:edit, :update, :destroy, :create, :new]
+  
+  def identify_the_user
+  	@current_user = User.find_by_id(session["user_id"])
+  end
+  
+  def authorize_user
+  	@pageUser = User.find(params[:id])
+  	if @current_user.blank? || @current_user.id != params[:id].to_i
+  		redirect_to user_url(params[:id])
+  	else
+  		return true
+  	end
+  end
+
   # GET /users
   # GET /users.json
   def index
