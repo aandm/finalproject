@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     if session[:user_id].present?
-      @groups = Groups.where("user_id = #{session[:user_id]}").order('created_at DESC')
+      @groups = Group.where("user_id = #{session[:user_id]}").order('created_at DESC')
     end
   end
 

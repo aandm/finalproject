@@ -80,6 +80,7 @@ User.create	username: "iluvgumdrops",
 banana = User.find_by_username("AnnaBanana")
 bear = User.find_by_username("ImACarebear")
 bball = User.find_by_username("bballplaya")
+baby = User.find_by_username("BabyC")
 
 Post.create text: "Happy banana dance!",
 	url: "http://24.media.tumblr.com/tumblr_mbeacveUWM1qg9iulo1_400.gif",
@@ -120,3 +121,7 @@ Post.create text: "Basketball was originally played with a soccer ball. The firs
 
 Post.create text: "I love playing basketball!",
 	user_id: bball.id
+
+Post.create text: "I want a kitty!",
+	url: "http://youtu.be/ctJJrBw7e-c",
+	user_id: baby.id

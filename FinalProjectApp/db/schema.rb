@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20130316023947) do
 
   create_table "posts", :force => true do |t|
     t.string   "url"
-    t.string   "text"
+    t.text   "text"
     t.integer  "user_id"
     t.string   "url_html"
     t.datetime "created_at", :null => false

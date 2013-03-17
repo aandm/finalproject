@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 
+include AutoHtml
   
   # GET /posts
   # GET /posts.json
