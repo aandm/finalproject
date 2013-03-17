@@ -19,12 +19,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+  	redirect_to root_url
     @users = User.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.json { render json: @users }
+    #end
   end
 
   # GET /users/1

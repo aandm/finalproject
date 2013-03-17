@@ -13,12 +13,9 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/1
   # GET /subscriptions/1.json
   def show
+    redirect_to subscriptions_url
     @subscription = Subscription.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @subscription }
-    end
   end
 
   # GET /subscriptions/new
@@ -35,6 +32,7 @@ class SubscriptionsController < ApplicationController
 
   # GET /subscriptions/1/edit
   def edit
+  	redirect_to subscriptions_url
     @subscription = Subscription.find(params[:id])
   end
 
@@ -46,8 +44,8 @@ class SubscriptionsController < ApplicationController
 
     respond_to do |format|
       if @subscription.save
-        format.html { redirect_to @subscription, notice: 'Subscription was successfully created.' }
-        format.json { render json: @subscription, status: :created, location: @subscription }
+        format.html { redirect_to subscriptions_url, notice: 'Subscription was successfully created.' }
+        format.json { render json: subscriptions_url, status: :created, location: @subscription }
       else
         format.html { redirect_to subscriptions_url }
         format.json { render json: @subscription.errors, status: :unprocessable_entity }
@@ -59,7 +57,7 @@ class SubscriptionsController < ApplicationController
   # PUT /subscriptions/1.json
   def update
     @subscription = Subscription.find(params[:id])
-
+	
     respond_to do |format|
       if @subscription.update_attributes(params[:subscription])
         format.html { redirect_to @subscription, notice: 'Subscription was successfully updated.' }

@@ -1,5 +1,8 @@
 FinalProjectApp::Application.routes.draw do
 
+  resources :group_members
+
+
   resources :groups
 
 

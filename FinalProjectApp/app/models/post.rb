@@ -10,10 +10,13 @@ class Post < ActiveRecord::Base
   include AutoHtmlFor	 
   auto_html_for :url do
     html_escape
-    image
+    image(:width => 300, :height => 300)
     youtube(:width => 400, :height => 250)
+    vimeo(:width => 400, :height => 250)
     link :target => "_blank", :rel => "nofollow"
     simple_format
   end
+  
+  
   
 end

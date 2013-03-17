@@ -1,15 +1,21 @@
-<h1>My Groups:</h1>
-
 <br />
-
+<%= link_to "My Subscriptions", subscriptions_url %> |
+<%= link_to "My Followers", followers_url %> |
 <%= link_to 'Add a New Group', new_group_path %>
 
 <p />
-<br>
+<br />
+<h3>My Groups:</h3>
+
+<p />
 <% if @groups.present? %>
   <% @groups.each do |group| %>
     <li><%= link_to group.group_name, edit_group_path(group) %> |
 	<%= link_to 'Delete', group, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %></li>
+	<ul>
+		<!--<li><%= group.group_members %></li> -->
+	</ul>
+	
   <% end %>
 <% else %>
   No groups yet.

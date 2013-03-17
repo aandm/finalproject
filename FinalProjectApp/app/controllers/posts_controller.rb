@@ -1,6 +1,22 @@
 class PostsController < ApplicationController
 
-include AutoHtml
+  include AutoHtml
+
+  before_filter :identify_the_user
+  before_filter :authorize_user, :only => [:edit, :update, :destroy, :create, :new]
+  
+  def identify_the_user
+  	@current_user = User.find_by_id(session["user_id"])
+  end
+  
+  def authorize_user
+  	@pageUser = Post.find_by_id(params[:id])
+  	if @current_user.blank? || @current_user.id != @pageUser.user_id
+  		redirect_to posts_url
+  	else
+  		return true
+  	end
+  end
   
   # GET /posts
   # GET /posts.json
@@ -8,6 +24,7 @@ include AutoHtml
 
     if session[:user_id].present?
       @posts = Post.where("user_id = #{session[:user_id]}").order('created_at DESC')
+      @posts = @posts.page(params[:page]).per(2)
     end
   end
 

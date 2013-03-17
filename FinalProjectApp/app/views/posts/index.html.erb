@@ -19,7 +19,7 @@
         <p></p>
         <% if post.url.present? %>
             <!-- <%= image_tag("#{post.url}", :height => '300', :width => '300') %> -->
-            <%= link_to post.url_html, :class => "youtube url" %>
+            <%= link_to post.url_html, :class => "url" %>
         <% end %><br>
 
         <%= link_to "View Comments (#{post.comments.count})", post %>

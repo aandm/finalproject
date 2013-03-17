@@ -1,24 +1,20 @@
 class CommentsController < ApplicationController
+
+  
   # GET /comments
   # GET /comments.json
   def index
+  	redirect_to root_url
     @comments = Comment.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @comments }
-    end
   end
 
   # GET /comments/1
   # GET /comments/1.json
   def show
+  	redirect_to root_url
     @comment = Comment.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @comment }
-    end
   end
 
   # GET /comments/new
@@ -34,6 +30,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+  	redirect_to root_url
     @comment = Comment.find(params[:id])
   end
 

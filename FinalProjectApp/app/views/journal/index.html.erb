@@ -2,21 +2,32 @@
   <div class="span12">
      <h1 class="page-header"><style type="text/css">
         h1 { text-align:center; }
-    </style>Featured Posts</h1>
     
-    <% @randomPost.each do |post| %>
-        <b><%= link_to "#{post.user.username}", "/#{post.user.username}" %></b>
-    	<n style="font-size:10px">on
-    	<%= post.created_at.strftime("%d %B %Y at %I:%M%p") %></n>
-    	<p></p>
-    	<%= post.text %>
-    	<p></p>
-    	<% if post.url.present? %>
-        	<!-- <%= image_tag("#{post.url}", :height => '300', :width => '300') %> -->
-        	 <%= link_to post.url_html, :class => "youtube url" %>
-        <% end %> 
-        <hr>
-        
+
+    
+    <% if params[:search].present? && @match.count >= 2 %>
+    	</style>Search Results</h1>   		
+    	<% @match.each do |result| %>
+    		<li><b><%= link_to "#{result.username}", "/#{result.username}" %></b> |
+    		<%= "#{result.firstname} #{result.lastname}" %>	</li>    
+    	<% end %> 	
+    <% else %>
+    	</style>Featured Posts</h1>
+    	<% @randomPost.each do |post| %>
+        	<b><%= link_to "#{post.user.username}", "/#{post.user.username}" %></b>
+    		<n style="font-size:10px">on
+    		<%= post.created_at.strftime("%d %B %Y at %I:%M%p") %></n>
+    		<p></p>
+    		<%= post.text %>
+    		<p></p>
+    		<% if post.url.present? %>
+        		<!-- <%= image_tag("#{post.url}", :height => '300', :width => '300') %> -->
+        	 	<%= link_to post.url_html, :class => "url" %>
+        	<% end %> 
+        	
+        	<%= link_to "View Comments (#{post.comments.count})", post %>
+        	<hr> 
+    	<% end %>
     <% end %>
 
     
