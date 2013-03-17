@@ -10,10 +10,18 @@
 <p />
 <% if @groups.present? %>
   <% @groups.each do |group| %>
-    <li><%= link_to group.group_name, edit_group_path(group) %> |
+    <li><%= link_to group.group_name, group_url(group.id) %> |
+    <%= link_to 'Edit', edit_group_path(group) %> |
 	<%= link_to 'Delete', group, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %></li>
 	<ul>
-		<!--<li><%= group.group_members %></li> -->
+		<% @members = GroupMember.where(:group_id => group.id) %>
+		<% @members.each do |member| %>
+  			<% @m = User.where(:id => member.member_id)%>
+  			<% @m.each do |user| %>  		
+				<li><%= link_to user.username, user_url(user.username) %> |
+				<%= link_to 'Delete', member, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %></li>
+			<% end %>
+  		<% end %>
 	</ul>
 	
   <% end %>

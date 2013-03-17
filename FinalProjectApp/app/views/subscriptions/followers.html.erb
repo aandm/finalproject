@@ -3,8 +3,7 @@
 <br>
 <% if @subscriptions.present? %>
 	<% @subscriptions.each do |subscription| %>
-	  <li><%= link_to subscription.subscriber.username, user_url(subscription.subscriber_id) %> |
-	  <%= link_to 'Delete', subscription, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %></li>
+	  <li><%= link_to subscription.subscriber.username, user_url(subscription.subscriber_id) %> </li>
 	<% end %>
 <% else %>
 	No followers yet.

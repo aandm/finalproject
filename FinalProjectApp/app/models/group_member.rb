@@ -2,7 +2,7 @@ class GroupMember < ActiveRecord::Base
   attr_accessible :group_id, :member_id
   
   belongs_to :group
-  has_many :members, :class_name => 'User'
+  has_many :users, :class_name => 'User', :foreign_key => :user_id
   
   before_create :check_if_already_member
   

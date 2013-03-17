@@ -2,11 +2,17 @@
 
 <p>
   <h1><%= @group.group_name %></h1>
-</p>
-
-	
-	
+<p>
+<br>
+  <% @members.each do |member| %>
+  	<% @m = User.where(:id => member.member_id)%>
+  	<% @m.each do |user| %>  		
+		<li><%= link_to user.username, user_url(user.username) %> |
+		<%= link_to 'Delete', member, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %></li>
+	<% end %>
+  <% end %>
 <p />
 
+<br>
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>

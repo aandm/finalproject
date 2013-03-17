@@ -1,6 +1,8 @@
 if Rails.env.development?
   User.destroy_all
   Post.destroy_all
+  Group.destroy_all
+  Subscription.destroy_all
 end
 
 password = "hockey"
@@ -125,3 +127,15 @@ Post.create text: "I love playing basketball!",
 Post.create text: "I want a kitty!",
 	url: "http://youtu.be/ctJJrBw7e-c",
 	user_id: baby.id
+	
+Group.create group_name: "Friends",
+	user_id: baby.id
+	
+Group.create group_name: "Family",
+	user_id: baby.id
+
+Subscription.create user_id: bear.id,
+	subscriber_id: baby.id
+	
+Subscription.create user_id: baby.id,
+	subscriber_id: banana.id

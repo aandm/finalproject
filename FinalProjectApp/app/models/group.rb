@@ -3,6 +3,7 @@ class Group < ActiveRecord::Base
   
   has_many :group_members
   belongs_to :user
+  has_many :users
   
   before_create :check_if_already_have_group
 

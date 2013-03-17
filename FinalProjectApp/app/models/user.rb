@@ -11,6 +11,6 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :subscribers, :class_name => 'Subscriptions', :foreign_key => 'user_id'
   has_many :subscriptions, :class_name => 'Subscriptions', :foreign_key => 'subscriber_id'
-  has_many :group_members, :through => :groups
+  belongs_to :group_members
   
 end
