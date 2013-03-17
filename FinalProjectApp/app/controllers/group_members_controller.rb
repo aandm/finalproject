@@ -2,7 +2,7 @@ class GroupMembersController < ApplicationController
   # GET /group_members
   # GET /group_members.json
   def index
-  	redirect_to root_url
+  	redirect_to groups_url
     @group_members = GroupMember.all
 
   end
@@ -11,17 +11,15 @@ class GroupMembersController < ApplicationController
   # GET /group_members/1.json
   def show
     @group_member = GroupMember.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @group_member }
-    end
+	redirect_to groups_url
   end
 
   # GET /group_members/new
   # GET /group_members/new.json
   def new
     @group_member = GroupMember.new
+    @group_categories = Group.where(:user_id => session[:user_id])
+    @users = User.where("id != ?", session[:user_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,6 +30,7 @@ class GroupMembersController < ApplicationController
   # GET /group_members/1/edit
   def edit
     @group_member = GroupMember.find(params[:id])
+    redirect_to groups_url
   end
 
   # POST /group_members
@@ -41,8 +40,8 @@ class GroupMembersController < ApplicationController
 
     respond_to do |format|
       if @group_member.save
-        format.html { redirect_to @group_member, notice: 'Group member was successfully created.' }
-        format.json { render json: @group_member, status: :created, location: @group_member }
+        format.html { redirect_to groups_url, notice: 'Group member was successfully added.' }
+        format.json { render json: groups_url, status: :created, location: @group_member }
       else
         format.html { redirect_to groups_url }
         format.json { render json: @group_member.errors, status: :unprocessable_entity }

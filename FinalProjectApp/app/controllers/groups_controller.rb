@@ -1,4 +1,22 @@
 class GroupsController < ApplicationController
+
+  before_filter :identify_the_user
+  before_filter :authorize_user, :only => [:edit, :update, :destroy, :show]
+  
+  def identify_the_user
+  	@current_user = User.find_by_id(session["user_id"])
+  end
+  
+  def authorize_user
+  	@pageUser = Group.find_by_id(params[:id])
+  	if @current_user.blank? || @current_user.id != @pageUser.user_id
+  		redirect_to groups_url
+  	else
+  		return true
+  	end
+  end
+
+
   # GET /groups
   # GET /groups.json
   def index

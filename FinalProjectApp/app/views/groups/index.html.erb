@@ -1,29 +1,35 @@
-<br />
-<%= link_to "My Subscriptions", subscriptions_url %> |
-<%= link_to "My Followers", followers_url %> |
-<%= link_to 'Add a New Group', new_group_path %>
+
+<h3><%= link_to "My Subscriptions", subscriptions_url %> |
+<%= link_to "My Followers", followers_url %></h3>
+
 
 <p />
 <br />
-<h3>My Groups:</h3>
+<h1>My Groups:</h1>
+<%= link_to 'Add a New Group', new_group_path %> |
+<%= link_to 'Add a Friend to a Group', new_group_member_url %>
 
 <p />
+<br>
 <% if @groups.present? %>
   <% @groups.each do |group| %>
-    <li><%= link_to group.group_name, group_url(group.id) %> |
+    <style type="text/css">
+    	c{font-size: 200%}
+    </style>
+    <li><c><%= link_to group.group_name, group_url(group.id) %></c> &nbsp (
     <%= link_to 'Edit', edit_group_path(group) %> |
-	<%= link_to 'Delete', group, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %></li>
+	<%= link_to 'Delete', group, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %> )</li>
 	<ul>
 		<% @members = GroupMember.where(:group_id => group.id) %>
 		<% @members.each do |member| %>
   			<% @m = User.where(:id => member.member_id)%>
   			<% @m.each do |user| %>  		
-				<li><%= link_to user.username, user_url(user.username) %> |
-				<%= link_to 'Delete', member, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %></li>
+				<li><%= link_to user.username, user_url(user.id) %> (
+				<%= link_to 'Delete', member, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %> )</li>
 			<% end %>
   		<% end %>
 	</ul>
-	
+	<hr>
   <% end %>
 <% else %>
   No groups yet.

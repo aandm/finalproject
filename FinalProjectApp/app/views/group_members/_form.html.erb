@@ -1,25 +1,27 @@
+
 <%= form_for(@group_member) do |f| %>
   <% if @group_member.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@group_member.errors.count, "error") %> prohibited this group_member from being saved:</h2>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@group_member.errors.count, "error") %> prohibited this group_member from being saved:</h2>
 
-      <ul>
-      <% @group_member.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+	  <ul>
+	  <% @group_member.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	  <% end %>
+	  </ul>
+	</div>
   <% end %>
 
   <div class="field">
-    <%= f.label :group_id %><br />
-    <%= f.number_field :group_id %>
+	<%= f.label :group_id %><br />
+	<%= f.collection_select :group_id, @group_categories.order('group_name asc'), :id, :group_name %>
   </div>
   <div class="field">
-    <%= f.label :member_id %><br />
-    <%= f.number_field :member_id %>
+	<%= f.label :member_id %><br />
+	<%= f.collection_select :member_id, @users.order('username asc'), :id, :username %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+	<%= f.submit %>
   </div>
 <% end %>
+

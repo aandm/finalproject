@@ -3,6 +3,7 @@ if Rails.env.development?
   Post.destroy_all
   Group.destroy_all
   Subscription.destroy_all
+  GroupMember.destroy_all
 end
 
 password = "hockey"
@@ -139,3 +140,8 @@ Subscription.create user_id: bear.id,
 	
 Subscription.create user_id: baby.id,
 	subscriber_id: banana.id
+
+friends = Group.find_by_group_name("Friends")
+
+GroupMember.create group_id: friends.id,
+	member_id: banana.id

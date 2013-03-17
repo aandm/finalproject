@@ -7,7 +7,6 @@ class Subscription < ActiveRecord::Base
   validates_presence_of :subscriber_id, :user_id
   
   before_create :check_if_already_subscribed
-  after_destroy :remove_from_groups
   
   def check_if_already_subscribed
   	@check = Subscription.where(:user_id => self.user_id, :subscriber_id => self.subscriber_id).count
@@ -18,14 +17,6 @@ class Subscription < ActiveRecord::Base
   	end
   end
   
-  def remove_from_groups
-  	@groups = Group.where(:user_id => self.subscriber_id)
-  	
-  	@groups.each do |group|
-  		@id = group.group_id
-  		@list = GroupMember.where(:group_id => @id, :member_id => self.user_id)
-  	end
-  end
   	
 
 end
