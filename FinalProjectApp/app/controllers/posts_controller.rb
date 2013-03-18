@@ -2,8 +2,8 @@ class PostsController < ApplicationController
 
   include AutoHtml
 
-  before_filter :identify_the_user
-  before_filter :authorize_user, :only => [:edit, :update, :destroy, :create, :new]
+ # before_filter :identify_the_user
+ # before_filter :authorize_user, :only => [:edit, :update, :destroy, :create, :new]
   
   def identify_the_user
   	@current_user = User.find_by_id(session["user_id"])
@@ -16,16 +16,6 @@ class PostsController < ApplicationController
   	else
   		return true
   	end
-  end
-  
-  # GET /posts
-  # GET /posts.json
-  def index
-
-    if session[:user_id].present?
-      @posts = Post.where("user_id = #{session[:user_id]}").order('created_at DESC')
-      @posts = @posts.page(params[:page]).per(2)
-    end
   end
 
   # GET /posts/1
@@ -64,7 +54,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-      	
+      	format.js
         format.html { redirect_to "/#{session[:username]}", notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
@@ -102,7 +92,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def view
+  def index
       user = User.find_by_username(params[:vieweduser])
       session[:vieweduser] = user.username
       session[:viewed_id] = user.id
@@ -110,8 +100,8 @@ class PostsController < ApplicationController
         @viewed_id = user.id
         @curruser_id = session[:user_id]
         @posts = Post.where(:user_id => @viewed_id).order("id desc")
+        @posts = @posts.page(params[:page]).per(5)
         @username = user.username
-        render :index
       else
         redirect_to root_url
       end

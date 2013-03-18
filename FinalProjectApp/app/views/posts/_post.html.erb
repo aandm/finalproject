@@ -1,0 +1,22 @@
+
+       
+        <n style="font-size:20px"><b><%= post.created_at.strftime("%B %d, %Y at %I:%M %p") %></b></n>
+        <p></p>
+        <%= post.text %>
+        <p></p>
+        <% if post.url.present? %>
+            <!-- <%= image_tag("#{post.url}", :height => '300', :width => '300') %> -->
+            <%= link_to post.url_html, :class => "url" %>
+        <% end %><br>
+
+        <%= link_to "View Comments (#{post.comments.count})", post %>
+        
+        <% if @viewed_id == @curruser_id %>
+            
+            | <%= link_to 'Edit', edit_post_path(post) %> |
+            <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Any comments on this post will also be permanently deleted.  Select OK to confirm deletion.' } %>
+        <% end %>
+        <hr>
+        
+
+

@@ -21,9 +21,9 @@ Add a comment:
   <%= f.hidden_field :post_id, :value => params[:id] %>
 
   <% if session[:username].present? %>
-	<%= f.hidden_field :username, :value => session[:username] %>
+  <%= f.hidden_field :username, :value => session[:username] %>
   <% else %>
-   	<%= f.hidden_field :username, :value => "Anonymous" %>
+    <%= f.hidden_field :username, :value => "Anonymous" %>
   <% end %>
 
   <%= f.submit "Submit" %>  
@@ -31,6 +31,6 @@ Add a comment:
 
 <ul id = "comments_section">
 <% @comments.each do |comment| %>
- 	<%= render 'comments/comment', :comment => comment %>
+  <%= render 'comments/comment', :comment => comment %>
 <% end %>
 </ul>

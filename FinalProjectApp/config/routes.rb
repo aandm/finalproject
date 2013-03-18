@@ -23,7 +23,7 @@ FinalProjectApp::Application.routes.draw do
 
   get "/followers" => 'subscriptions#followers', :as => :followers
 
-  get "/:vieweduser" => 'posts#view', :as => :view
+  get "/:vieweduser" => 'posts#index', :as => :view
 
 
 
