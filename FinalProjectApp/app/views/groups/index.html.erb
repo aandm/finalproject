@@ -21,13 +21,17 @@
 	<%= link_to 'Delete', group, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %> )</li>
 	<ul>
 		<% @members = GroupMember.where(:group_id => group.id) %>
-		<% @members.each do |member| %>
-  			<% @m = User.where(:id => member.member_id)%>
-  			<% @m.each do |user| %>  		
-				<li><%= link_to user.username, user_url(user.id) %> (
-				<%= link_to 'Delete', member, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %> )</li>
+		<% if @members.count >=1 %>
+			<% @members.each do |member| %>
+				<% @m = User.where(:id => member.member_id)%>
+					<% @m.each do |user| %>  		
+						<li><%= link_to user.username, user_url(user.id) %> (
+						<%= link_to 'Delete', member, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %> )</li>
+					<% end %>
 			<% end %>
-  		<% end %>
+		<% else %>
+			<li> No group members yet. </li>
+		<% end %>
 	</ul>
 	<hr>
   <% end %>
