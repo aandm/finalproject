@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_filter :identify_the_user
-  before_filter :authorize_user, :only => [:edit, :update, :destroy, :create, :new]
+  before_filter :authorize_user, :only => [:edit, :update, :destroy]
   
   def identify_the_user
   	@current_user = User.find_by_id(session["user_id"])
