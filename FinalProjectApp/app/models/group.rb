@@ -5,6 +5,8 @@ class Group < ActiveRecord::Base
   belongs_to :user
   has_many :users
   
+  validates_presence_of :group_name, :user_id
+  
   before_create :check_if_already_have_group
 
   
