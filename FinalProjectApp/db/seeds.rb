@@ -2,6 +2,9 @@ if Rails.env.development?
   Subscription.destroy_all
   Post.destroy_all
   User.destroy_all
+  Group.destroy_all
+  Subscription.destroy_all
+  GroupMember.destroy_all
   
 end
 
@@ -144,3 +147,21 @@ User.limit(7).offset(1).each do |subuser|
 		subscriber_id: bear.id
 	end
 end
+
+#create groups
+Group.create group_name: "Friends",
+user_id: user9.id
+
+Group.create group_name: "Family",
+user_id: user9.id
+
+Subscription.create user_id: bear.id,
+subscriber_id: user9.id
+
+Subscription.create user_id: user9.id,
+subscriber_id: banana.id
+
+friends = Group.find_by_group_name("Friends")
+
+GroupMember.create group_id: friends.id,
+member_id: banana.id
