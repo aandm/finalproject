@@ -68,7 +68,7 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         session[:username] = @user.username
         ConfirmNewUserMailer.confirm(@user).deliver
-        format.html { redirect_to "/#{session[:username]}", notice: 'User was successfully created.' }
+        format.html { redirect_to "user_url", notice: 'User was successfully created.' }
         format.json { render json: root_url, status: :created, location: @user }
       else
         @action = "new"
@@ -86,7 +86,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to "/#{session[:username]}", notice: 'User was successfully updated.' }
+        format.html { redirect_to "/users/#{session[:user_id]}", notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

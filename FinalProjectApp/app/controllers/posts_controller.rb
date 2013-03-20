@@ -23,6 +23,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = Comment.where(:post_id => params[:id]).order("id desc")
+    @comments = @comments.page(params[:page]).per(20)
     @comment = Comment.new
 
     respond_to do |format|
@@ -107,12 +108,5 @@ class PostsController < ApplicationController
         redirect_to root_url
       end
   end
-
-  def friendposts
-      @posts = Post.joins(:user.joins(:subscriptions).where(subscription.subscriber_id => session[:user_id]))
-      #@posts = Post.where(Post.user.subscription.subscriber_id => session[:user_id]).order("id desc")
-      @posts = @posts.page(params[:page]).per(5)
-  end   
-
 
 end

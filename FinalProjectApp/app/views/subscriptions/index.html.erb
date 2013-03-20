@@ -4,7 +4,7 @@
 <% if @subscriptions.present? %>
   <% @subscriptions.each do |subscription| %>
     <li><%= link_to subscription.user.username, user_url(subscription.user_id) %> |
-	<%= link_to 'Delete', subscription, method: :delete, data: { confirm: 'Select OK to confirm deletion.' } %></li>
+	<%= link_to 'Unsubscribe', subscription, method: :delete, data: { confirm: 'Select OK to confirm you would like to unsubscribe.' } %></li>
   <% end %>
 <% else %>
   No subscriptions yet.
