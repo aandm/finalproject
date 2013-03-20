@@ -87,6 +87,7 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
+      format.js
       format.html { redirect_to "/#{session[:username]}" }
       format.json { head :no_content }
     end
@@ -106,7 +107,12 @@ class PostsController < ApplicationController
         redirect_to root_url
       end
   end
-    
+
+  def friendposts
+      @posts = Post.joins(:user.joins(:subscriptions).where(subscription.subscriber_id => session[:user_id]))
+      #@posts = Post.where(Post.user.subscription.subscriber_id => session[:user_id]).order("id desc")
+      @posts = @posts.page(params[:page]).per(5)
+  end   
 
 
 end

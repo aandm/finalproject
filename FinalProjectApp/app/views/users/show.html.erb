@@ -28,7 +28,7 @@
 </p>
 
 <% if @user == @current_user %>
-	<%= link_to 'Edit Profile and Password', edit_user_path(@user) %> |
+	<%= link_to 'Edit Profile', edit_user_path(@user) %> |
 	<%= link_to 'Back', "/#{session[:username]}" %>
 <% else %>
 	<%= link_to 'See Posts', "/#{@user.username}" %>

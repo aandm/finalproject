@@ -67,7 +67,7 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id] = @user.id
         session[:username] = @user.username
-        ConfirmNewUserMailer.confirm(@user).deliver
+       # ConfirmNewUserMailer.confirm(@user).deliver
         format.html { redirect_to "/#{session[:username]}", notice: 'User was successfully created.' }
         format.json { render json: root_url, status: :created, location: @user }
       else

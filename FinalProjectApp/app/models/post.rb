@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments
   
-  validates_presence_of :text
+  validates_presence_of :text, :unless => :url?
 
   include AutoHtmlFor	 
   auto_html_for :url do

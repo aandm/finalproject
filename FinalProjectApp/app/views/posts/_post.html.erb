@@ -1,5 +1,5 @@
 
-       
+    <ul id="post_<%= post.id %>">
         <n style="font-size:20px"><b><%= post.created_at.strftime("%B %d, %Y at %I:%M %p") %></b></n>
         <p></p>
         <%= post.text %>
@@ -14,8 +14,9 @@
         <% if @viewed_id == @curruser_id %>
             
             | <%= link_to 'Edit', edit_post_path(post) %> |
-            <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Any comments on this post will also be permanently deleted.  Select OK to confirm deletion.' } %>
+            <%= link_to 'Delete', post, method: :delete, remote: true, data: { confirm: 'Any comments on this post will also be permanently deleted.  Select OK to confirm deletion.' } %>
         <% end %>
+    </ul>
         <hr>
         
 
